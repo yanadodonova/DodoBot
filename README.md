@@ -1,50 +1,44 @@
 # DodoBot
 DodoBot
-DodoBot is a Python class that allows you to interact with a chatbot that can answer questions related to various topics such as physics, mathematics, philology, geography, and astronomy.
+DodoBot - це клас Python, який дозволяє взаємодіяти з чат-ботом, що може відповідати на питання, пов'язані з різними темами, такими як фізика, математика, філологія, географія та астрономія.
 
-Getting Started
-To use DodoBot, you need to have Python 3 installed on your computer. Once you have Python installed, you can download DodoBot code and save it in a Python file. Then, you can run the Python file to start the chatbot.
+Початок роботи
+Щоб використовувати DodoBot, на вашому комп'ютері має бути встановлений Python 3. Після встановлення Python ви можете завантажити код DodoBot і зберегти його у файлі Python. Потім ви можете запустити файл Python, щоб запустити чат-бота.
 
-python
-Copy
-from DodoBot import DodoBot
+------
 
-bot = DodoBot()
-bot.start()
-Once you run the above code, the chatbot will start and you can interact with it.
+Використання
+Чат-бот може відповідати на питання, пов'язані з наступними темами:
 
-Usage
-The chatbot can answer questions related to the following topics:
+Фізика
+Математика
+Філологія
+Географія
+Астрономія
+Щоб поставити запитання, просто введіть тему, про яку ви хочете запитати, і чат-бот проведе вас через процес постановки запитання.
 
-Physics
-Mathematics
-Philology
-Geography
-Astronomy
-To ask a question, simply type in the topic you want to ask about, and the chatbot will guide you through the process of asking your question.
+Фізика
+Чат-бот може відповісти на питання, пов'язані з наступними темами з фізики:
 
-Physics
-The chatbot can answer questions related to the following topics in physics:
+Знайти силу між двома об'єктами
+Закон Ома
+Закон Бойля
+Щоб поставити запитання з фізики, введіть "фізика" (без лапок), і чат-бот підкаже вам, як поставити запитання.
 
-Find force between two objects
-Ohm's Law
-Boyle's Law
-To ask a question related to physics, type in "фізика" (without quotes) and the chatbot will guide you through the process of asking your question.
+Математика
+Чат-бот поки що не має функцій, пов'язаних з математикою.
 
-Mathematics
-The chatbot does not have any functions related to mathematics yet.
+Філологія
+Чат-бот поки що не має функцій, пов'язаних з філологією.
 
-Philology
-The chatbot does not have any functions related to philology yet.
+Географія
+Чат-бот поки що не має функцій, пов'язаних з географією.
 
-Geography
-The chatbot does not have any functions related to geography yet.
+Астрономія
+Чат-бот ще не має функцій, пов'язаних з астрономією.
 
-Astronomy
-The chatbot does not have any functions related to astronomy yet.
+Долучитися
+Якщо ви знайшли помилку або хочете запропонувати нову функцію, будь ласка, створіть проблему на GitHub. Запити на вилучення також вітаються!
 
-Contributing
-If you find a bug or want to propose a new feature, please open an issue on GitHub. Pull requests are also welcome!
-
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+Ліцензія
+Цей проект поширюється за ліцензією MIT License. Дивіться файл LICENSE для деталей.
