@@ -6,7 +6,7 @@ DodoBot - це програма на Python, яка може допомогти 
 
 1. Клонуйте репозиторій за допомогою команди:
 ```python
-git clone https://github.com/your_username/DodoBot.git
+git clone https://github.com/yanadodonova/DodoBot.git
 ```
 2. Перейдіть до папки проекту:
 ```python
