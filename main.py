@@ -42,10 +42,18 @@ class DodoBot:
                 break
             elif sub_topic == 'знайти f':
                 while True:
-                    m1 = float(input('Введіть m1 = '))
-                    m2 = float(input('Введите m2 = '))
-                    r = float(input('Введіть r = '))
-                    result = self._newton(m1, m2, r)
+                    try:
+                        m1 = float(input('Введіть m1 = '))
+                        m2 = float(input('Введите m2 = '))
+                        r = float(input('Введіть r = '))
+                    except ValueError:
+                        print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                        continue
+                    try:
+                        result = self._newton(m1, m2, r)
+                    except ValueError as e:
+                        print(f'\033[1;31mПомилка: {e}\033[0m')
+                        continue
                     print('\033[1;32mF = {}\033[0m'.format(result))
                     repeat = input(
                         'Чи хочете ви повторити? Так/Ні\n ').lower()
@@ -56,19 +64,43 @@ class DodoBot:
                     sub_sub_topic = input(
                         'Що ви хочете знайти: I, V, R ').lower()
                     if sub_sub_topic == 'i':
-                        v = float(input('Введіть V = '))
-                        r = float(input('Введіть R = '))
-                        result = self._ohms_law_current(v, r)
+                        try:
+                            v = float(input('Введіть V = '))
+                            r = float(input('Введіть R = '))
+                        except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                            continue
+                        try:
+                            result = self._ohms_law_current(v, r)
+                        except ValueError as e:
+                            print(f'\033[1;31mПомилка: {e}\033[0m')
+                            continue
                         print('\033[1;32mI = {}\033[0m'.format(result))
                     elif sub_sub_topic == 'v':
-                        i = float(input('Введіть I = '))
-                        r = float(input('Введіть R = '))
-                        result = self._ohms_law_voltage(i, r)
+                        try:
+                            i = float(input('Введіть I = '))
+                            r = float(input('Введіть R = '))
+                        except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                            continue
+                        try:
+                            result = self._ohms_law_voltage(i, r)
+                        except ValueError as e:
+                            print(f'\033[1;31mПомилка: {e}\033[0m')
+                            continue
                         print('\033[1;32mV = {}\033[0m'.format(result))
                     elif sub_sub_topic == 'r':
-                        v = float(input('Введіть V = '))
-                        i = float(input('Введіть I = '))
-                        result = self._ohms_law_resistance(v, i)
+                        try:
+                            v = float(input('Введіть V = '))
+                            i = float(input('Введіть I = '))
+                        except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                            continue
+                        try:
+                            result = self._ohms_law_resistance(v, i)
+                        except ValueError as e:
+                            print(f'\033[1;31mПомилка: {e}\033[0m')
+                            continue
                         print('\033[1;32mR = {}\033[0m'.format(result))
                     else:
                         print(
@@ -83,16 +115,32 @@ class DodoBot:
                     sub_sub_topic = input(
                         'Що ви хочете знайти: P1, V1\n ').lower()
                     if sub_sub_topic == 'p1':
-                        V1 = float(input('Введіть V1 = '))
-                        P2 = float(input('Введіть P2 = '))
-                        V2 = float(input('Введіть V2 = '))
-                        result = self._boyles_law_p1(V1, P2, V2)
+                        try:
+                            V1 = float(input('Введіть V1 = '))
+                            P2 = float(input('Введіть P2 = '))
+                            V2 = float(input('Введіть V2 = '))
+                        except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                            continue
+                        try:
+                            result = self._boyles_law_p1(V1, P2, V2)
+                        except ValueError as e:
+                            print(f'\033[1;31mПомилка: {e}\033[0m')
+                            continue
                         print('\033[1;32mP1 = {}\033[0m'.format(result))
                     elif sub_sub_topic == 'v1':
-                        P1 = float(input('Введіть P1 = '))
-                        V2 = float(input('Введіть V2 = '))
-                        P2 = float(input('Введіть P2 = '))
-                        result = self._boyles_law_v1(P1, V2, P2)
+                        try:
+                            P1 = float(input('Введіть P1 = '))
+                            V2 = float(input('Введіть V2 = '))
+                            P2 = float(input('Введіть P2 = '))
+                        except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                            continue
+                        try:
+                            result = self._boyles_law_v1(P1, V2, P2)
+                        except ValueError as e:
+                            print(f'\033[1;31mПомилка: {e}\033[0m')
+                            continue
                         print('\033[1;32mV1 = {}\033[0m'.format(result))
                     else:
                         print(
@@ -117,44 +165,64 @@ class DodoBot:
                 break
             elif sub_topic == 'формула векторного добутку векторів':
                 while True:
-                    A = input('Введіть перший вектор у форматі x, y, z = ')
-                    A = tuple(map(float, A.split(', ')))
-                    B = input('Введіть другий вектор у форматі x, y, z = ')
-                    B = tuple(map(float, B.split(', ')))
-                    result = self._cross_product(A, B)
-                    print(f'\033[1;32mВекторний добуток = {result}\033[0m')
+                    try:
+                        A = input('Введіть перший вектор у форматі x, y, z = ')
+                        A = tuple(map(float, A.split(', ')))
+                        B = input('Введіть другий вектор у форматі x, y, z = ')
+                        B = tuple(map(float, B.split(', ')))
+                        result = self._cross_product(A, B)
+                        print(f'\033[1;32mВекторний добуток = {result}\033[0m')
+                    except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                    except Exception as e:
+                        print(f"\033[1;31mПомилка: {e}\033[0m")
                     repeat = input(
                         'Чи хочете ви повторити? Так/Ні\n').lower()
                     if repeat == 'ні':
                         break
             elif sub_topic == 'формула скалярного добутку векторів':
                 while True:
-                    A = input('Введіть перший вектор у форматі x, y, z = ')
-                    A = tuple(map(float, A.split(', ')))
-                    B = input('Введіть другий вектор у форматі x, y, z = ')
-                    B = tuple(map(float, B.split(', ')))
-                    result = self._dot_product(A, B)
-                    print(f'\033[1;32mСкалярний добуток = {result}\033[0m')
+                    try:
+                        A = input('Введіть перший вектор у форматі x, y, z = ')
+                        A = tuple(map(float, A.split(', ')))
+                        B = input('Введіть другий вектор у форматі x, y, z = ')
+                        B = tuple(map(float, B.split(', ')))
+                        result = self._dot_product(A, B)
+                        print(f'\033[1;32mСкалярний добуток = {result}\033[0m')
+                    except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                    except Exception as e:
+                        print(f"\033[1;31mПомилка: {e}\033[0m")
                     repeat = input(
                         'Чи хочете ви повторити? Так/Ні\n').lower()
                     if repeat == 'ні':
                         break
             elif sub_topic == 'площа кола':
                 while True:
-                    radius = float(input('Введіть радіус кола = '))
-                    result = self._area_of_circle(radius)
-                    print(f'\033[1;32mПлоща кола = {result}\033[0m')
+                    try:
+                        radius = float(input('Введіть радіус кола = '))
+                        result = self._area_of_circle(radius)
+                        print(f'\033[1;32mПлоща кола = {result}\033[0m')
+                    except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                    except Exception as e:
+                        print(f"\033[1;31mПомилка: {e}\033[0m")
                     repeat = input(
                         'Чи хочете ви повторити? Так/Ні\n').lower()
                     if repeat == 'ні':
                         break
             elif sub_topic == 'площа трапеції':
                 while True:
-                    a = float(input('Введіть а трапеції = '))
-                    b = float(input('Введіть b трапеції = '))
-                    h = float(input('Введіть висоту трапеції = '))
-                    result = self._area_of_trapezoid(a, b, h)
-                    print(f'\033[1;32mПлоща трапеції = {result}\033[0m')
+                    try:
+                        a = float(input('Введіть а трапеції = '))
+                        b = float(input('Введіть b трапеції = '))
+                        h = float(input('Введіть висоту трапеції = '))
+                        result = self._area_of_trapezoid(a, b, h)
+                        print(f'\033[1;32mПлоща трапеції = {result}\033[0m')
+                    except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                    except Exception as e:
+                        print(f"\033[1;31mПомилка: {e}\033[0m")
                     repeat = input(
                         'Чи хочете ви повторити? Так/Ні\n').lower()
                     if repeat == 'ні':
@@ -234,32 +302,61 @@ class DodoBot:
             elif sub_topic == 'як тебе звати':
                 print('\033[1;32m-----------------\nМене звуть DodoBot! Я допомагаю в різних уроках\n-------------------\033[0m')
             elif sub_topic == 'розповісти анекдот':
-                joke = self.get_joke()
-                print(f'\033[1;32m---------------\n{joke}\n----------------\033[0m')
+                try:
+                    joke = self.get_joke()
+                    print(f'\033[1;32m---------------\n{joke}\n----------------\033[0m')
+                
+                except Exception as e:
+                    print(f"\033[1;31mПомилка: {e}\033[0m")
             elif sub_topic == 'гра історія':
                 while True:
-                    self.history_game()
+                    try:
+                        self.history_game()
+                    except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть слово\033[0m')
+                    except Exception as e:
+                        print(f"\033[1;31mПомилка: {e}\033[0m")
                     repeat = input(
                         'Чи хочете ви повторити? Так/Ні\n').lower()
                     if repeat == 'ні':
                         break
             elif sub_topic == 'скільки днів до літа':
-                result = self.plural_days(self.summer())
-                print(f'\033[1;32m-----------\n{result} до літа\n----------\033[0m')
+                try:
+                    result = self.plural_days(self.summer())
+                    print(f'\033[1;32m-----------\n{result} до літа\n----------\033[0m')
+                except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть слово\033[0m')
+                except Exception as e:
+                    print(f"\033[1;31mПомилка: {e}\033[0m")
             elif sub_topic == 'яка тварина цього року':
-                yeara = int(input('Введіть поточний рік: '))
-                result = self.animal_of_the_year(yeara)
-                print(f'\033[1;32m-----------\n{result}\n----------\033[0m')
+                try:
+                    yeara = int(input('Введіть поточний рік: '))
+                    result = self.animal_of_the_year(yeara)
+                    print(f'\033[1;32m-----------\n{result}\n----------\033[0m')
+                except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                except Exception as e:
+                    print(f"\033[1;31mПомилка: {e}\033[0m")
             elif sub_topic == 'який колір цього року':
-                yearb = int(input('Введіть поточний рік: '))
-                result = self.color_of_the_year(yearb)
-                print(f'\033[1;32m-----------\n{result}\n----------\033[0m')
+                try:
+                    yearb = int(input('Введіть поточний рік: '))
+                    result = self.color_of_the_year(yearb)
+                    print(f'\033[1;32m-----------\n{result}\n----------\033[0m')
+                except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                except Exception as e:
+                    print(f"\033[1;31mПомилка: {e}\033[0m")
             elif sub_topic == 'визначити ваш знак зодіаку':
-                day = int(input('Введіть день коли ви народилися: '))
-                month = int(input('Введіть місяць, коли ви народилися: '))
-                result = self.zodiac_sign(day, month)
-                print(f'\033[1;32m-----------\n{result}\n----------\033[0m')
-            else: 
+                try:
+                    day = int(input('Введіть день коли ви народилися: '))
+                    month = int(input('Введіть місяць, коли ви народилися: '))
+                    result = self.zodiac_sign(day, month)
+                    print(f'\033[1;32m-----------\n{result}\n----------\033[0m')
+                except ValueError:
+                            print('\033[1;31mПомилка: Будь ласка, введіть число\033[0m')
+                except Exception as e:
+                    print(f"\033[1;31mПомилка: {e}\033[0m")
+            else:
                 print('\033[1;32mВибачте, я не розумію цю тему\033[0m')
                 continue
 
