@@ -15,9 +15,12 @@ class DodoBot:
 
     def start(self):
         while True:
-            print('\033[1;32mВітаю, мене звати DodoBot\nВи можете задати мені питання з наступних тем:\nфізика, математика, філологія, географія, астрономія або інше\033[0m')
+            print('\033[1;32mВітаю, мене звати DodoBot\nВи можете задати мені питання з наступних тем:\nфізика, математика, філологія, географія, астрономія або інше\nабо вийти щоб закрити програму\033[0m')
             topic = input().lower()
-            if topic in self.topics:
+            if topic == 'вийти':
+                print('\033[1;32mДо побачення!\033[0m')
+                return
+            elif topic in self.topics:
                 self.topics[topic]()
             else:
                 print('\033[1;32mВибачте, я не розумію цю тему\033[0m')
@@ -214,26 +217,40 @@ class DodoBot:
     def _handle_other(self):
         while True:
             print('\033[1;32mОсь мої функції в темі "Інше":\033[0m')
-            print('''\033[1;32mЯкий зараз місяць\nЯк тебе звати\nРозповісти анекдот,\nгра історія,\nскільки днів до літа\nабо назад\033[0m''')
+            print('''\033[1;32mЯкий зараз місяць\nЯк тебе звати\nРозповісти анекдот,\nгра історія,\nскільки днів до літа\nяка тварина цього року\nякий колір цього року\nвизначити ваш знак зодіаку\nабо назад\033[0m''')
             sub_topic = input().lower()
             if sub_topic == 'назад':
                 break
             elif sub_topic == 'який зараз місяць':
-                print(f'\033[1;32m------------\nЗараз {current_month_ukr()}\n----------\033[0m')
+                print(f'\033[1;32m------------\nЗараз {self.current_month_ukr()}\n----------\033[0m')
             elif sub_topic == 'як тебе звати':
                 print('\033[1;32m-----------------\nМене звуть DodoBot! Я допомагаю в різних уроках\n-------------------\033[0m')
             elif sub_topic == 'розповісти анекдот':
-                print('\033[1;32m---------------\n1.Штірліц довго дивився на одну крапку. Потім перевів погляд на іншу крапку.\n“Двокрапка” — здогадався Штірліц. \n2.лист із центра до Штірліца не дійшов. Він перечитав його ще раз — однаково не дійшов.\n3.Штірліц сидів дома. З вікна дуло. Штірліц натиснув Alt+F4 — вікно зникло.\n4.Штірліц читав книгу біля вікна, з вікна дуло. Штірліц закрив вікно — дуло пропало.\n5.Штірліц всю ніч топив камін.  На ранок камін потонув.\n--------------------------------\033[0m')
+                joke = self.get_joke()
+                print(f'\033[1;32m---------------\n{joke}\n----------------\033[0m')
             elif sub_topic == 'гра історія':
                 while True:
-                    history_game()
+                    self.history_game()
                     repeat = input(
-                        '\033[1;32mЧи хочете ви повторити? Так/Ні\n\033[0m').lower()
+                        'Чи хочете ви повторити? Так/Ні\n').lower()
                     if repeat == 'ні':
                         break
             elif sub_topic == 'скільки днів до літа':
-                result = plural_days(summer())
+                result = self.plural_days(self.summer())
                 print(f'\033[1;32m-----------\n{result} до літа\n----------\033[0m')
+            elif sub_topic == 'яка тварина цього року':
+                yeara = int(input('Введіть поточний рік: '))
+                result = self.animal_of_the_year(yeara)
+                print(f'\033[1;32m-----------\n{result}\n----------\033[0m')
+            elif sub_topic == 'який колір цього року':
+                yearb = int(input('Введіть поточний рік: '))
+                result = self.color_of_the_year(yearb)
+                print(f'\033[1;32m-----------\n{result}\n----------\033[0m')
+            elif sub_topic == 'визначити ваш знак зодіаку':
+                day = int(input('Введіть день коли ви народилися: '))
+                month = int(input('Введіть місяць, коли ви народилися: '))
+                result = self.zodiac_sign(day, month)
+                print(f'\033[1;32m-----------\n{result}\n----------\033[0m')
             else: 
                 print('\033[1;32mВибачте, я не розумію цю тему\033[0m')
                 continue
@@ -292,58 +309,107 @@ class DodoBot:
     
         return 0.5 * (a + b) * h
 #---------ФУНКЦІЯ ІНШЕ---------
-def current_month_ukr():
-    now = datetime.now()
-    ukr_month_names = [
-        "січень", "лютий", "березень", "квітень",
-        "травень", "червень", "липень", "серпень",
-        "вересень", "жовтень", "листопад", "грудень"
-    ]
-    month_num = now.month - 1
-    return ukr_month_names[month_num]
+    def current_month_ukr(self):
+        now = datetime.now()
+        ukr_month_names = [
+            "січень", "лютий", "березень", "квітень",
+            "травень", "червень", "липень", "серпень",
+            "вересень", "жовтень", "листопад", "грудень"
+        ]
+        month_num = now.month - 1
+        return ukr_month_names[month_num]
+
+    def get_joke(self):
+        jokes = [
+            'Штірліц довго дивився на одну крапку. Потім перевів погляд на іншу крапку. “Двокрапка” — здогадався Штірліц.',
+            'лист із центра до Штірліца не дійшов. Він перечитав його ще раз — однаково не дійшов.',
+            'Штірліц сидів дома. З вікна дуло. Штірліц натиснув Alt+F4 — вікно зникло.',
+            'Штірліц читав книгу біля вікна, з вікна дуло. Штірліц закрив вікно — дуло пропало.',
+            'Штірліц всю ніч топив камін.  На ранок камін потонув.'
+        ]
+        return choice(jokes)
+
+    def color_of_the_year(self, year_new):
+        color = {0: 'Белый (Металл)', 1: 'Белый (Металл)', 2: 'Черный (Вода)', 3: 'Черный (Вода)', 4: 'Голубой (Дерево)',
+                5: 'Голубой (Дерево)', 6: 'Красный (Огонь)', 7: 'Красный (Огонь)', 8: 'Желтый (Земля)', 9: 'Желтый (Земля)'}
+        k = year_new % 10
+        return color[k]
+
+    def history_game(self):
+        templates = [
+            "У {1} в {2} році {0} {3} {4}.",
+            "{0} {3} {4} у {1} у {2} році.",
+            "{0} зробив {4} у {2} році у {1}, щоб {3}.",
+            "{0} {3} {4} в {1} у місці під назвою {2}.",
+            "{0} {3} {4} у {1} тому часі, коли {2} було важливим місцем."
+        ]
+
+        prompts = ["Хто?", "Де?", "Коли?", "Навіщо?", "Що?"]
+        answers = []
+
+        for prompt in prompts:
+            answer = input(prompt + " ")
+            answers.append(answer)
+
+        template = choice(templates)
+        text = template.format(*answers)
+        print(text)
+
+    def plural_days(self, n):  # выбирает окончание слова
+        days = ['день', 'дня', 'днів']
+
+        if n % 10 == 1 and n % 100 != 11:
+            p = 0
+        elif 2 <= n % 10 <= 4 and (n % 100 < 10 or n % 100 >= 20):
+            p = 1
+        else:
+            p = 2
+
+        return str(n) + ' ' + days[p]
+
+    def summer(self):  # визначає скільки днів до літа
+        now = date.today()
+        reachday = date(2023, 6, 1)
+        result = (reachday - now).days  # ЗАЛИШАЄ ТІЛЬКИ ДНІ!!!
+        
+        return result
 
 
+    def animal_of_the_year(self, year_new):
+        year = ['Щур', 'Буйвол', 'Тигр',
+                'Кролик (Кіт)', 'Дракон', 'Змія', 'Кінь', 'Вівця', 'Мавпа', 'Півень', 'Собака', 'Свиня']
+        k = year_new % 10
+        yk = abs((year_new - 2020) % 12)
+        return year[yk]
 
+    def zodiac_sign(self, day, month):
+        # Визначаємо знак зодіаку за датою народження
+        if month == 12:
+            sign = 'Стрілець' if (day < 22) else 'Козеріг'
+        elif month == 1:
+            sign = 'Козеріг' if (day < 20) else 'Водолій'
+        elif month == 2:
+            sign = 'Водолій' if (day < 19) else 'Риби'
+        elif month == 3:
+            sign = 'Риби' if (day < 21) else 'Овен'
+        elif month == 4:
+            sign = 'Овен' if (day < 20) else 'Телець'
+        elif month == 5:
+            sign = 'Телець' if (day < 21) else 'Близнюки'
+        elif month == 6:
+            sign = 'Близнюки' if (day < 21) else 'Рак'
+        elif month == 7:
+            sign = 'Рак' if (day < 23) else 'Лев'
+        elif month == 8:
+            sign = 'Лев' if (day < 23) else 'Діва'
+        elif month == 9:
+            sign = 'Діва' if (day < 23) else 'Терези'
+        elif month == 10:
+            sign = 'Терези' if (day < 23) else 'Скорпіон'
+        elif month == 11:
+            sign = 'Скорпіон' if (day < 22) else 'Стрілець'
 
-def history_game():
-    templates = [
-        "У {1} в {2} році {0} {3} {4}.",
-        "{0} {3} {4} у {1} у {2} році.",
-        "{0} зробив {4} у {2} році у {1}, щоб {3}.",
-        "{0} {3} {4} в {1} у місці під назвою {2}.",
-        "{0} {3} {4} у {1} тому часі, коли {2} було важливим місцем."
-    ]
-
-    prompts = ["Хто?", "Де?", "Коли?", "Навіщо?", "Що?"]
-    answers = []
-
-    for prompt in prompts:
-        answer = input(prompt + " ")
-        answers.append(answer)
-
-    template = choice(templates)
-    text = template.format(*answers)
-    print(text)
-
-def plural_days(n):  # выбирает окончание слова
-    days = ['день', 'дня', 'днів']
-
-    if n % 10 == 1 and n % 100 != 11:
-        p = 0
-    elif 2 <= n % 10 <= 4 and (n % 100 < 10 or n % 100 >= 20):
-        p = 1
-    else:
-        p = 2
-
-    return str(n) + ' ' + days[p]
-
-def summer():  # визначає скільки днів до літа
-    now = date.today()
-    reachday = date(2023, 6, 1)
-    result = (reachday - now).days  # ЗАЛИШАЄ ТІЛЬКИ ДНІ!!!
-    
-    return result
-
+        return sign
 #----------------------------
 
 if __name__ == '__main__':
