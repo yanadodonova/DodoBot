@@ -64,7 +64,7 @@ python main.py
 ## Ця функція містить наступні опції:
 
 1. Яка різниця між Some та Any
-2. Як утворити PassiveVoice в PresentSimple\
+2. Як утворити PassiveVoice в PresentSimple
 
 # Астрономія
 ## Ця тема містить наступні функції:
